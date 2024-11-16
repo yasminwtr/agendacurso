@@ -6,6 +6,7 @@ import { IoIosSearch } from "react-icons/io";
 import UserModal from '@/app/components/UserModal';
 import { TbEditCircle } from "react-icons/tb";
 import useUsers from '@/app/hooks/useUsers';
+import withAuth from "@/app/auth/withAuth";
 
 function Usuarios() {
     const columns = [{ uid: 'name', name: 'Nome' }, { uid: 'email', name: 'Email' }, { uid: 'actions', name: 'Ações' }];
@@ -158,4 +159,4 @@ function Usuarios() {
     );
 }
 
-export default Usuarios;
+export default withAuth(Usuarios);

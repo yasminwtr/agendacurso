@@ -9,6 +9,7 @@ import '@schedule-x/theme-default/dist/index.css';
 import useEvents from '@/app/hooks/useEvents';
 import ScheduleModal from '@/app/components/ScheduleModal';
 import PagesLayout from '@/app/components/PagesLayout';
+import withAuth from "@/app/auth/withAuth";
 
 const eventsServicePlugin = createEventsServicePlugin();
 const calendarControls = createCalendarControlsPlugin();
@@ -72,4 +73,4 @@ function Agenda() {
     );
 }
 
-export default Agenda;
+export default withAuth(Agenda);

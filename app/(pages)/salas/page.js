@@ -6,6 +6,7 @@ import { IoIosSearch } from "react-icons/io";
 import useRooms from '@/app/hooks/useRooms';
 import RoomModal from '@/app/components/RoomModal';
 import { TbEditCircle } from "react-icons/tb";
+import withAuth from "@/app/auth/withAuth";
 
 function Salas() {
     const columns = [{ uid: 'name', name: 'Nome' }, { uid: 'actions', name: 'Ações' }];
@@ -158,4 +159,4 @@ function Salas() {
     );
 }
 
-export default Salas;
+export default withAuth(Salas);

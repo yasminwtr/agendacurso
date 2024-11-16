@@ -6,6 +6,7 @@ import { IoIosSearch } from "react-icons/io";
 import ClassModal from '@/app/components/ClassModal';
 import { TbEditCircle } from "react-icons/tb";
 import useClasses from '@/app/hooks/useClasses';
+import withAuth from "@/app/auth/withAuth";
 
 function Turmas() {
     const columns = [{ uid: 'number', name: 'Número' }, { uid: 'name', name: 'Nome' }, { uid: 'collector', name: 'Coletor' }, { uid: 'participants', name: 'Participantes' },{ uid: 'actions', name: 'Ações' }];
@@ -158,4 +159,4 @@ function Turmas() {
     );
 }
 
-export default Turmas;
+export default withAuth(Turmas);
