@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 const withoutAuth = (WrappedComponent) => {
-  return (props) => {
+  const HOC = (props) => {
     const [isLoading, setIsLoading] = useState(true);
     const router = useRouter();
 
@@ -28,6 +28,9 @@ const withoutAuth = (WrappedComponent) => {
 
     return <WrappedComponent {...props} />;
   };
+
+  HOC.displayName = `withoutAuth(${WrappedComponent.displayName || WrappedComponent.name || "Component"})`;
+  return HOC;
 };
 
 export default withoutAuth;

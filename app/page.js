@@ -13,6 +13,7 @@ function Home() {
   const router = useRouter();
 
   const handleLogin = async () => {
+    document.body.style.cursor = 'wait';
     try {
       const response = await fetch('/api/auth', {
         method: 'POST',
@@ -36,8 +37,8 @@ function Home() {
         type: "success",
         message: "Login bem sucedido."
       });
-
       router.push('/agenda')
+      document.body.style.cursor = 'default';
 
     } catch (err) {
       setAlertConfig({

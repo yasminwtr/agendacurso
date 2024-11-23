@@ -5,13 +5,14 @@ import TextField from '@mui/material/TextField';
 import useUsers from '../hooks/useUsers';
 import ParametrizedAlert from '@/app/components/ParametrizedAlert';
 
+const defaultUserValues = {
+    name: '',
+    email: '',
+    password: '',
+};
+
 const UserModal = ({ fetchUsers, isOpen, onClose, onOpen, onOpenChange, user, setUser }) => {
     const { addUser, updateUser, deleteUser } = useUsers();
-    const defaultUserValues = {
-        name: '',
-        email: '',
-        password: '',
-    };
     const [userValues, setUserValues] = useState(defaultUserValues);
     const [alertConfig, setAlertConfig] = useState({ open: false, type: "success", message: "" });
 

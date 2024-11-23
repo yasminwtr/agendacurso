@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 const withAuth = (WrappedComponent) => {
-  return (props) => {
+  const HOC = (props) => {
     const [isLoading, setIsLoading] = useState(true);
     const router = useRouter();
 
@@ -41,6 +41,9 @@ const withAuth = (WrappedComponent) => {
 
     return <WrappedComponent {...props} />;
   };
+
+  HOC.displayName = `withAuth(${WrappedComponent.displayName || WrappedComponent.name || "Component"})`;
+  return HOC;
 };
 
 export default withAuth;

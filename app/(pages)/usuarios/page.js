@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState, useMemo, useCallback } from 'react';
 import PagesLayout from '@/app/components/PagesLayout';
-import { Table, TableHeader, TableColumn, TableBody, TableRow, Spinner, Tooltip, TableCell, Input, Button, Pagination, useDisclosure } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, Spinner, Tooltip, TableCell, Input, Pagination, useDisclosure } from "@nextui-org/react";
 import { IoIosSearch } from "react-icons/io";
 import UserModal from '@/app/components/UserModal';
 import { TbEditCircle } from "react-icons/tb";
@@ -14,14 +14,13 @@ function Usuarios() {
     const [filterValue, setFilterValue] = useState("");
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [page, setPage] = useState(1);
-    const hasSearchFilter = Boolean(filterValue);
     const { isOpen, onClose, onOpen, onOpenChange } = useDisclosure();
     const [user, setUser] = useState(null);
 
     const filteredItems = useMemo(() => {
         let filteredUsers = [...users];
 
-        if (hasSearchFilter) {
+        if (filterValue) {
             filteredUsers = filteredUsers.filter((item) =>
                 item.name.toLowerCase().includes(filterValue.toLowerCase()),
             );
@@ -67,7 +66,7 @@ function Usuarios() {
             default:
                 return cellValue;
         }
-    }, []);
+    }, [onOpen]);
 
     const onSearchChange = useCallback((value) => {
         if (value) {
@@ -103,7 +102,7 @@ function Usuarios() {
                 />
             </div>
         );
-    }, [items.length, page, pages, hasSearchFilter]);
+    }, [page, pages]);
 
     return (
         <PagesLayout>

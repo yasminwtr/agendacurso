@@ -19,19 +19,20 @@ import useRooms from '@/app/hooks/useRooms';
 import useCourseTypes from '@/app/hooks/useCourseTypes';
 import ParametrizedAlert from '@/app/components/ParametrizedAlert';
 
+const defaultEventValues = {
+    title: '',
+    start: dayjs(),
+    end: dayjs(),
+    classId: 'None',
+    roomId: 'None',
+    courseTypeId: 'None',
+};
+
 const ScheduleModal = ({ fetchEvents, isOpen, onClose, onOpen, onOpenChange, event }) => {
     const { classes } = useClasses();
     const { courseTypes } = useCourseTypes();
     const { rooms } = useRooms();
     const { addEvent, updateEvent, deleteEvent } = useEvents();
-    const defaultEventValues = {
-        title: '',
-        start: dayjs(),
-        end: dayjs(),
-        classId: 'None',
-        roomId: 'None',
-        courseTypeId: 'None',
-    };
     const [eventValues, setEventValues] = useState(defaultEventValues);
     const [alertConfig, setAlertConfig] = useState({ open: false, type: "success", message: "" });
 
@@ -73,7 +74,7 @@ const ScheduleModal = ({ fetchEvents, isOpen, onClose, onOpen, onOpenChange, eve
                     setAlertConfig({
                         open: true,
                         type: "success",
-                        message: "Evento atualizado com sucesso!"
+                        message: "Curso atualizado com sucesso!"
                     });
 
                 } else {
@@ -81,11 +82,12 @@ const ScheduleModal = ({ fetchEvents, isOpen, onClose, onOpen, onOpenChange, eve
                     setAlertConfig({
                         open: true,
                         type: "success",
-                        message: "Evento adicionado com sucesso!"
+                        message: "Curso adicionado com sucesso!"
                     });
                 }
 
                 fetchEvents();
+                setEventValues(defaultEventValues)
                 onClose();
 
             } catch (error) {
@@ -104,17 +106,18 @@ const ScheduleModal = ({ fetchEvents, isOpen, onClose, onOpen, onOpenChange, eve
             setAlertConfig({
                 open: true,
                 type: "success",
-                message: "Evento excluído com sucesso!"
+                message: "Curso excluído com sucesso!"
             });
 
             fetchEvents();
+            setEventValues(defaultEventValues)
             onClose();
 
         } catch (error) {
             setAlertConfig({
                 open: true,
                 type: "error",
-                message: "Ocorreu um erro ao excluir o evento. Tente novamente."
+                message: "Ocorreu um erro ao excluir o curso. Tente novamente."
             });
         }
     };

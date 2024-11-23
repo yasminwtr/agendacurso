@@ -5,14 +5,15 @@ import TextField from '@mui/material/TextField';
 import useClasses from '../hooks/useClasses';
 import ParametrizedAlert from '@/app/components/ParametrizedAlert';
 
+const defaultClassValues = {
+    name: '',
+    number: '',
+    collector: '',
+    participants: ''
+};
+
 const ClassModal = ({ fetchClasses, isOpen, onClose, onOpen, onOpenChange, classIndividual, setClassIndividual }) => {
     const { addClass, updateClass, deleteClass } = useClasses();
-    const defaultClassValues = {
-        name: '',
-        number: '',
-        collector: '',
-        participants: ''
-    };
     const [classValues, setClassValues] = useState(defaultClassValues);
     const [alertConfig, setAlertConfig] = useState({ open: false, type: "success", message: "" });
 

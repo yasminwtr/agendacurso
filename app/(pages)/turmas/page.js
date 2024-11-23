@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState, useMemo, useCallback } from 'react';
 import PagesLayout from '@/app/components/PagesLayout';
-import { Table, TableHeader, TableColumn, TableBody, TableRow, Spinner, Tooltip, TableCell, Input, Button, Pagination, useDisclosure } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, Spinner, Tooltip, TableCell, Input, Pagination, useDisclosure } from "@nextui-org/react";
 import { IoIosSearch } from "react-icons/io";
 import ClassModal from '@/app/components/ClassModal';
 import { TbEditCircle } from "react-icons/tb";
@@ -14,14 +14,13 @@ function Turmas() {
     const [filterValue, setFilterValue] = useState("");
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [page, setPage] = useState(1);
-    const hasSearchFilter = Boolean(filterValue);
     const { isOpen, onClose, onOpen, onOpenChange } = useDisclosure();
     const [classIndividual, setClassIndividual] = useState(null);
 
     const filteredItems = useMemo(() => {
         let filteredClasses = [...classes];
 
-        if (hasSearchFilter) {
+        if (filterValue) {
             filteredClasses = filteredClasses.filter((item) =>
                 item.name.toLowerCase().includes(filterValue.toLowerCase()),
             );
@@ -67,7 +66,7 @@ function Turmas() {
             default:
                 return cellValue;
         }
-    }, []);
+    }, [onOpen]);
 
     const onSearchChange = useCallback((value) => {
         if (value) {
@@ -103,7 +102,7 @@ function Turmas() {
                 />
             </div>
         );
-    }, [items.length, page, pages, hasSearchFilter]);
+    }, [page, pages]);
 
     return (
         <PagesLayout>

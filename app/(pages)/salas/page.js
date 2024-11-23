@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState, useMemo, useCallback } from 'react';
 import PagesLayout from '@/app/components/PagesLayout';
-import { Table, TableHeader, TableColumn, TableBody, TableRow, Spinner, Tooltip, TableCell, Input, Button, Pagination, useDisclosure } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, Spinner, Tooltip, TableCell, Input, Pagination, useDisclosure } from "@nextui-org/react";
 import { IoIosSearch } from "react-icons/io";
 import useRooms from '@/app/hooks/useRooms';
 import RoomModal from '@/app/components/RoomModal';
@@ -14,14 +14,13 @@ function Salas() {
     const [filterValue, setFilterValue] = useState("");
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [page, setPage] = useState(1);
-    const hasSearchFilter = Boolean(filterValue);
     const { isOpen, onClose, onOpen, onOpenChange } = useDisclosure();
     const [room, setRoom] = useState(null);
 
     const filteredItems = useMemo(() => {
         let filteredRooms = [...rooms];
 
-        if (hasSearchFilter) {
+        if (filterValue) {
             filteredRooms = filteredRooms.filter((room) =>
                 room.name.toLowerCase().includes(filterValue.toLowerCase()),
             );
@@ -67,7 +66,7 @@ function Salas() {
             default:
                 return cellValue;
         }
-    }, []);
+    }, [onOpen]);
 
     const onSearchChange = useCallback((value) => {
         if (value) {
@@ -103,7 +102,7 @@ function Salas() {
                 />
             </div>
         );
-    }, [items.length, page, pages, hasSearchFilter]);
+    }, [page, pages]);
 
     return (
         <PagesLayout>

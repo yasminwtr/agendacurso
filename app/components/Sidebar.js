@@ -10,6 +10,11 @@ const Sidebar = () => {
     const router = useRouter();
     const pathname = usePathname();
 
+    function Logout() {
+        localStorage.removeItem("token");
+        router.replace("/");
+    }
+
     return (
         <div className='navbar'>
             <div className='nav-title' onClick={() => router.push('/agenda')}>
@@ -62,7 +67,7 @@ const Sidebar = () => {
                     <span>Usuários</span>
                 </div>
 
-                <div>
+                <div onClick={Logout}>
                     <TbLogout2 size={22} />
                     <span>Sair</span>
                 </div>
